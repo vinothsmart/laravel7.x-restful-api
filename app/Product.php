@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Seller;
+use App\Product;
 use App\Category;
 use App\Transaction;
 use Illuminate\Database\Eloquent\Model;
