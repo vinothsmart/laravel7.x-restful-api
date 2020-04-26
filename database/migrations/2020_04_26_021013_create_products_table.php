@@ -15,6 +15,11 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('description', 1000);
+            $table->unsignedInteger('quantity');
+            $table->string('status')->default(Product::UNAVAILABLE_PRODUCT);
+            $table->string('image');
+            $table->foreignId('seller_id')->constrained();
             $table->timestamps();
         });
     }
