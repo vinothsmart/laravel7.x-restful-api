@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Seller;
+use App\Category;
+use App\Transaction;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -21,5 +24,20 @@ class Product extends Model
     public function isAvailable()
     {
         return $this->status == Product::AVAILABLE_PRODUCT;
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo('App\Seller');
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany('App\Transaction');
+    }
+    
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category');
     }
 }
