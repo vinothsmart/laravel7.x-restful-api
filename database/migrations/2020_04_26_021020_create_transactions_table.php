@@ -16,9 +16,12 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('quantity')->unsigned();
-            $table->foreignId('buyer_id')->constrained();
+            // $table->foreignId('buyer_id')->constrained();
+            $table->unsignedBigInteger('buyer_id');
             $table->foreignId('product_id')->constrained();
             $table->timestamps();
+
+            $table->foreign('buyer_id')->references('id')->on('users');
         });
     }
 
