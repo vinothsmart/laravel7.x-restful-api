@@ -1,6 +1,9 @@
 <?php
 namespace App\Traits;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
+
 trait ApiResponser 
 {
     private function successResponse($data, $code)
