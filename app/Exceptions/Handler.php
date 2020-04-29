@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Throwable;
 use App\Traits\ApiResponser;
+use Illuminate\Database\QueryException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -82,6 +83,15 @@ class Handler extends ExceptionHandler
         
         if ($exception instanceof HttpException) {
             return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
+        }
+
+        if ($exception instanceof QueryException) {
+            // dd($exception);
+            $errorCode = $exception->errorInfo[1];
+
+            if($errorCode == 1451) {
+                return $this->errorResponse('Cannot remove this resource permanently. It is realted with any other resource', 409);
+            }
         }
 
         return parent::render($request, $exception);
