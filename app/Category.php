@@ -12,6 +12,8 @@ class Category extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $hidden = ['pivot'];
+
     /**
      * The attributes that are mass assignable.
      *
