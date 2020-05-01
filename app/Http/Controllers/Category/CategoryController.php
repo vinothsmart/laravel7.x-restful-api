@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Category;
 
 use App\Category;
-use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ApiController;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends ApiController
 {
@@ -38,7 +39,19 @@ class CategoryController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name' => 'required',
+            'description' => 'required',
+        ];
+ 
+        $validator = Validator::make($request->all(), $rules);
+ 
+        if($validator->fails()){
+            return $this->errorResponse($validator->errors(), 422);
+        }
+
+        $newCategory = Category::create($request->all());
+        return $this->showOne($newCategory, 201);
     }
 
     /**
