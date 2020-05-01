@@ -40,6 +40,15 @@ Route::resource('buyers.categories', 'Buyer\BuyerCategoryController',['only' => 
 
 Route::resource('categories', 'Category\CategoryController',['except' => ['create', 'edit']]);
 
+Route::resource('categories.product', 'Category\CategoryProductController',['only' => ['index']]);
+
+Route::resource('categories.sellers', 'Category\CategorySellerController',['only' => ['index']]);
+
+Route::resource('categories.transactions', 'Category\CategoryTransactionController',['only' => ['index']]);
+
+Route::resource('categories.buyers', 'Category\CategoryBuyerController',['only' => ['index']]);
+
+
 /**
 * Products
 */
