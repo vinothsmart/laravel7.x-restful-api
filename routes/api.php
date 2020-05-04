@@ -50,6 +50,8 @@ Route::resource('categories.buyers', 'Category\CategoryBuyerController',['only' 
 
 Route::resource('products.categories', 'Product\ProductCategoryController',['only' => ['index', 'update', 'destroy']]);
 
+Route::resource('products.buyers.transactions', 'Product\ProductBuyerTransactionController',['only' => ['store']]);
+
 
 /**
 * Products
