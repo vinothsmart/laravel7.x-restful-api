@@ -55,10 +55,9 @@ class SellerProductController extends ApiController
         $data['image'] = $request->file('image')->store('public/products');
         $data['seller_id'] = $seller->id;
 
-        // $product = Product::create($data);
+        $product = Product::create($data);
 
-        // return $this->showOne($product);
-        return $data['image'];
+        return $this->showOne($product);
     }
 
     /**
