@@ -55,12 +55,12 @@ return [
             'visibility' => 'public',
         ],
         
-        'images' => [
-            'driver' => 'local',
-            'root' => public_path('img'),
-            'url' => env('APP_URL').'/img',
-            'visibility' => 'public',
-         ],
+        // 'images' => [
+        //     'driver' => 'local',
+        //     'root' => public_path('img'),
+        //     'url' => env('APP_URL').'/img',
+        //     'visibility' => 'public',
+        //  ],
 
         's3' => [
             'driver' => 's3',
