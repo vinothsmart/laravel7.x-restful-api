@@ -20,6 +20,8 @@ class Product extends Model
     const AVAILABLE_PRODUCT = 'available';
     const UNAVAILABLE_PRODUCT = 'unavailable';
 
+    public $transformer = ProductTransformer::class;
+
     /**
      * The attributes that are mass assignable.
      *

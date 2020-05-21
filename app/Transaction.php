@@ -5,6 +5,7 @@ namespace App;
 use App\Buyer;
 use App\Product;
 use Illuminate\Database\Eloquent\Model;
+use App\Transformers\TransactionTransformer;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
@@ -12,6 +13,9 @@ class Transaction extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
+
+    public $transformer = TransactionTransformer::class;
+    
     
     /**
      * The attributes that are mass assignable.
