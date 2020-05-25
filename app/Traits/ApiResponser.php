@@ -3,6 +3,7 @@ namespace App\Traits;
 
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 trait ApiResponser 
@@ -83,6 +84,17 @@ trait ApiResponser
 
     protected function paginate(Collection $collection)
     {
+        $rules = [
+            'per_page' => 'integer|min:2|max:50',
+        ];
+
+        Validator::validate(request()->all(), $rules);
+        
+        // $validator = Validator::make(request()->all(), $rules);
+        // if($validator->fails()){
+        //     return response()->json(['error' => $validator->errors()], 422);
+        // }
+
         $page = LengthAwarePaginator::resolveCurrentPage();
         
         $perPage = 15;
