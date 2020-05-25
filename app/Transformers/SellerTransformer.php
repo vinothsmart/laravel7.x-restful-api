@@ -2,6 +2,7 @@
 
 namespace App\Transformers;
 
+use App\Seller;
 use League\Fractal\TransformerAbstract;
 
 class SellerTransformer extends TransformerAbstract
@@ -39,6 +40,32 @@ class SellerTransformer extends TransformerAbstract
             'creationDate' => (string)$seller->created_at,
             'lastChange' => (string)$seller->updated_at,
             'deletedDate' => isset($seller->deleted_at) ? (string) $seller->deleted_at : null,
+            'links' => [
+                [
+                    'rel' => 'self',
+                    'href' => route('sellers.show', $seller->id),
+                ],
+                [
+                    'rel' => 'sellers.buyers',
+                    'href' => route('sellers.buyers.index', $seller->id),
+                ],
+                [
+                    'rel' => 'sellers.categories',
+                    'href' => route('buyers.categories.index', $seller->id),
+                ],
+                [
+                    'rel' => 'sellers.products',
+                    'href' => route('sellers.products.index', $seller->id),
+                ],
+                [
+                    'rel' => 'sellers.transactions',
+                    'href' => route('sellers.transactions.index', $seller->id),
+                ],
+                [
+                    'rel' => 'users',
+                    'href' => route('users.show', $seller->id),
+                ] 
+            ] 
         ]; 
     }
 
