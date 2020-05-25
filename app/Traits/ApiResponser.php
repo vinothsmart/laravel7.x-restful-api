@@ -115,8 +115,16 @@ trait ApiResponser
     protected function cacheResponse($data)
     {
         $url = request()->url();
-        return Cache::remember($url, Carbon::now()->addMinutes(1), function () use($data) {
+        $queryParams = request()->query();
+    
+        ksort($queryParams);
+    
+        $queryString =http_build_query($queryParams);
+    
+        $fullUrl = "{$url}?{$queryString}";
+    
+        return Cache::remember($fullUrl, Carbon::now()->addMinutes(5), function () use($data) {
             return $data;
         });
-    } 
+    }
 }
