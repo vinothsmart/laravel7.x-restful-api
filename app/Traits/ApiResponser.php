@@ -83,17 +83,12 @@ trait ApiResponser
     }
 
     protected function paginate(Collection $collection)
-    {
+    {      
         $rules = [
             'per_page' => 'integer|min:2|max:50',
         ];
 
         Validator::validate(request()->all(), $rules);
-        
-        // $validator = Validator::make(request()->all(), $rules);
-        // if($validator->fails()){
-        //     return response()->json(['error' => $validator->errors()], 422);
-        // }
 
         $page = LengthAwarePaginator::resolveCurrentPage();
         
