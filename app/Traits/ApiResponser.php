@@ -1,7 +1,9 @@
 <?php
 namespace App\Traits;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -33,6 +35,8 @@ trait ApiResponser
         $collection = $this->paginate($collection);
 
         $collection = $this->transformData($collection, $transformer);
+        
+        $collection = $this->cacheResponse($collection);
 
         return $this->successResponse($collection, $code);
     }
@@ -107,4 +111,12 @@ trait ApiResponser
     
         return $paginated;
     }
+
+    protected function cacheResponse($data)
+    {
+        $url = request()->url();
+        return Cache::remember($url, Carbon::now()->addMinutes(1), function () use($data) {
+            return $data;
+        });
+    } 
 }
