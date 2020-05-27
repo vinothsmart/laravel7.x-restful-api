@@ -41,12 +41,14 @@ class CategoryController extends ApiController
             'name' => 'required',
             'description' => 'required',
         ];
+
+        $this->validate($request, $rules);
  
-        $validator = Validator::make($request->all(), $rules);
+        // $validator = Validator::make($request->all(), $rules);
  
-        if($validator->fails()){
-            return $this->errorResponse($validator->errors(), 422);
-        }
+        // if($validator->fails()){
+        //     return $this->errorResponse($validator->errors(), 422);
+        // }
 
         $newCategory = Category::create($request->all());
         return $this->showOne($newCategory, 201);

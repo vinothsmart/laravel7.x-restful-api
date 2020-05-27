@@ -28,7 +28,7 @@ class TransfromInput
         
         $response = $next($request);
 
-        if(isset($response->exception) && $response->exception instanceof ValidationException){
+        if(isset($response->exception) ){
             $data = $response->getData();
 
             $transformedErrors = [];
