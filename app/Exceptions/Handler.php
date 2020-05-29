@@ -6,6 +6,7 @@ use Throwable;
 use App\Traits\ApiResponser;
 use Illuminate\Database\QueryException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -61,10 +62,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        if($exception instanceof ValidationException){
-            return $this->convertValidationExceptionToResponse($exception, $request);
-        }
-
         if ($exception instanceof ModelNotFoundException) {
             $modelName = strtolower(class_basename($exception->getModel()));
             return $this->errorResponse("Does not exists any {$modelName} with the specified identificator", 404);
@@ -98,6 +95,14 @@ class Handler extends ExceptionHandler
                 return $this->errorResponse('Cannot remove this resource permanently. It is realted with any other resource', 409);
             }
         }
+
+        if($exception instanceof ValidationException){
+            return $this->convertValidationExceptionToResponse($exception, $request);
+        }
+
+        if($exception instanceof TokenMismatchException){
+            return redirect()->back()->withInput($request->input());
+        } 
 
         if(config('app.debug')){
             return parent::render($request, $exception);
