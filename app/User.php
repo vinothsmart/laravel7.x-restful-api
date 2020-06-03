@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\Hashidable;
 use Illuminate\Support\Str;
 use App\Transformers\UserTransformer;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes;
+    use Notifiable, SoftDeletes, Hashidable;
 
     protected $dates = ['deleted_at'];
 
