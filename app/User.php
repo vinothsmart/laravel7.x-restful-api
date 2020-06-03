@@ -26,6 +26,14 @@ class User extends Authenticatable
 
     public $transformer = UserTransformer::class;
 
+    private function getModel($model, $routeKey)
+    {
+        $id = \Hashids::connection($model)->decode($routeKey)[0] ?? null;
+        $modelInstance = resolve($model);
+
+        return  $modelInstance->findOrFail($id);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
