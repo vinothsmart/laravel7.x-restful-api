@@ -37,15 +37,24 @@ return [
 
     'connections' => [
 
-        'main' => [
-            'salt' => 'your-salt-string',
-            'length' => 'your-length-integer',
+        \App\User::class => [
+            'salt' => \App\User::class.'7623e9b0009feff8e024a689d6ef59ce',
+            'length' => 5,
+        ],
+        \App\Product::class => [
+            'salt' => \App\Product::class.'7623e9b0009feff8e024a689d6ef59ce',
+            'length' => 2,
         ],
 
-        'alternative' => [
-            'salt' => 'your-salt-string',
-            'length' => 'your-length-integer',
-        ],
+        // 'main' => [
+        //     'salt' => 'your-salt-string',
+        //     'length' => 'your-length-integer',
+        // ],
+
+        // 'alternative' => [
+        //     'salt' => 'your-salt-string',
+        //     'length' => 'your-length-integer',
+        // ],
 
     ],
 
