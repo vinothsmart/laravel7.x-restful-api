@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\Hashidable;
 use Illuminate\Support\Str;
+use Laravel\Passport\HasApiTokens;
 use App\Transformers\UserTransformer;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,7 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes, Hashidable;
+    use Notifiable, SoftDeletes, Hashidable, HasApiTokens;
 
     protected $dates = ['deleted_at'];
 
