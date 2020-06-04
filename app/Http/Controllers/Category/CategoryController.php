@@ -15,6 +15,8 @@ class CategoryController extends ApiController
         parent::__construct();
     
         $this->middleware('transform.input:'.CategoryTransformer::class)->only(['store', 'update']);
+
+        $this->middleware('client.credentials')->only(['index', 'show']);
     }
 
     /**
