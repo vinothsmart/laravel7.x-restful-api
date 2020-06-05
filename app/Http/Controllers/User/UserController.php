@@ -18,9 +18,9 @@ class UserController extends ApiController
   
         $this->middleware('transform.input:'.UserTransformer::class)->only(['store','update']);
 
-        $this->middleware('auth:api')->except(['store','verify', 'resend']);
-
         $this->middleware('client.credentials')->only(['store', 'resend']);
+        
+        $this->middleware('auth:api')->except(['store','verify', 'resend']);
     }
 
     /**
