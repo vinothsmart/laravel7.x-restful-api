@@ -24,3 +24,6 @@ Route::get('/phpinfo', function() {
 Auth::routes([ 'register' => false ]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home/my-tokens', 'HomeController@getTokens')->name('personal-tokens');
+
