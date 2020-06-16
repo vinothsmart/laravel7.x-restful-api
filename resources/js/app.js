@@ -23,7 +23,7 @@ window.Vue = require('vue');
 
 Vue.component(
     'passport-personal-access-tokens', 
-    require('./components/passport/PersonalAccessToken.vue').default);
+    require('./components/passport/PersonalAccessTokens.vue').default);
 
 
 /**
