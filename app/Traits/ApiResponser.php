@@ -68,7 +68,12 @@ trait ApiResponser
         if(request()->has('sort_by')) {
             $attribute = $transformer::originalAttribute(request()->sort_by);
     
-            $collection = $collection->sortBy->$attribute;
+            // Added for asc and desc
+            if(request()->has('order_by') && request()->order_by === 'desc') {
+                $collection = $collection->sortByDesc->$attribute;
+            } else {
+                $collection = $collection->sortBy->$attribute;
+            }
         }
         
         return $collection;
